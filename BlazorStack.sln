@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30420.98
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorStack", "src\BlazorStack\BlazorStack.csproj", "{5163B72F-7CAF-42EC-84B2-9A915AAF8EC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{A5884609-F717-427C-825B-8EAFFE37F6E3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Server", "samples\server\Sample.Server.csproj", "{7FB450DD-3E98-49B1-BE7A-F5DF320EA57A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5163B72F-7CAF-42EC-84B2-9A915AAF8EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5163B72F-7CAF-42EC-84B2-9A915AAF8EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5163B72F-7CAF-42EC-84B2-9A915AAF8EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5163B72F-7CAF-42EC-84B2-9A915AAF8EC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB450DD-3E98-49B1-BE7A-F5DF320EA57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB450DD-3E98-49B1-BE7A-F5DF320EA57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB450DD-3E98-49B1-BE7A-F5DF320EA57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB450DD-3E98-49B1-BE7A-F5DF320EA57A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52B440F2-B3EC-4A1A-BC59-772C7D2F1D2F}
+	EndGlobalSection
+EndGlobal

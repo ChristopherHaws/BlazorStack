@@ -1,0 +1,121 @@
+﻿@using BlazorStyled
+@code {
+	// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+	string flex = default!;
+
+	/// <summary>
+	/// Defines whether to render Stack children horizontally.
+	/// </summary>
+	[Parameter] public bool Horizontal { get; set; }
+
+	/// <summary>
+	/// Defines whether the Stack should take up 100% of the height of its parent.
+	/// </summary>
+	[Parameter] public bool VerticalFill { get; set; }
+
+	/// <summary>
+	/// Defines how to align Stack children horizontally (along the x-axis).
+	/// </summary>
+	[Parameter] public StackAlignment? HorizontalAlignment { get; set; } = StackAlignment.Start;
+
+	/// <summary>
+	/// Defines how to align Stack children horizontally (along the y-axis).
+	/// </summary>
+	[Parameter] public StackAlignment? VerticalAlignment { get; set; } = StackAlignment.Start;
+
+	/// <summary>
+	/// Defines whether to render Stack children in the opposite direction (bottom-to-top if it's a
+	/// vertical Stack and right-to-left if it's a horizontal Stack).
+	/// </summary>
+	[Parameter] public bool Reverse { get; set; }
+
+	/// <summary>
+	/// Defines whether Stack children should wrap onto multiple rows or columns when they are about
+	/// to overflow the size of the Stack.
+	/// </summary>
+	[Parameter] public bool Wrap { get; set; }
+
+	/// <summary>
+	/// Defines the spacing between Stack children.
+	/// </summary>
+	[Parameter] public int? Gap { get; set; }
+
+	/// <summary>
+	/// Defines the row spacing between Stack children.
+	/// </summary>
+	[Parameter] public int? VerticalGap { get; set; }
+
+	/// <summary>
+	/// Defines the column spacing between Stack children.
+	/// </summary>
+	[Parameter] public int? HorizontalGap { get; set; }
+
+	/// <summary>
+	/// Defines the minimum width that the Stack can take.
+	/// </summary>
+	[Parameter] public string? MinWidth { get; set; }
+
+	/// <summary>
+	/// Defines the maximum width that the Stack can take.
+	/// </summary>
+	[Parameter] public string? MaxWidth { get; set; }
+
+	/// <summary>
+	/// Defines the minimum height that the Stack can take.
+	/// </summary>
+	[Parameter] public string? MinHeight { get; set; }
+
+	/// <summary>
+	/// Defines the maximum height that the Stack can take.
+	/// </summary>
+	[Parameter] public string? MaxHeight { get; set; }
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+
+	private string alignmentName(StackAlignment? type) => type switch {
+		StackAlignment.Start => "flex-start",
+		StackAlignment.End => "flex-end",
+		StackAlignment.Centered => "center",
+		StackAlignment.SpaceAround => "space-around",
+		StackAlignment.SpaceBetween => "space-between",
+		StackAlignment.Even => "space-evenly",
+		_ => "flex-start"
+	};
+}
+
+<Styled @bind-Classname="@flex">
+	display: flex;
+	flex-direction: @((Horizontal ? "row" : "column") + (Reverse ? "-reverse" : string.Empty));
+	flex-wrap: @(Wrap ? "wrap" : "nowrap");
+	@(VerticalFill ? "height: 100%;" : string.Empty)
+	@(HorizontalAlignment is null ? string.Empty : $"{(Horizontal ? "justify-content" : "align-items")}: {alignmentName(HorizontalAlignment)};")
+	@(VerticalAlignment is null ? string.Empty : $"{(Horizontal ? "align-items" : "justify-content")}: {alignmentName(VerticalAlignment)};")
+	@(Gap is null ? string.Empty : $"gap: {Gap}px;")
+	@(Gap is null ? string.Empty : $"grid-gap: {Gap}px;")
+	@(HorizontalGap is null ? string.Empty : $"column-gap: {HorizontalGap}px;")
+	@(HorizontalGap is null ? string.Empty : $"grid-column-gap: {HorizontalGap}px;")
+	@(VerticalGap is null ? string.Empty : $"row-gap: {VerticalGap}px;")
+	@(VerticalGap is null ? string.Empty : $"grid-row-gap: {VerticalGap}px;")
+	@(MinWidth is null ? string.Empty : $"min-width: {MinWidth};")
+	@(MaxWidth is null ? string.Empty : $"max-width: {MaxWidth};")
+	@(MinHeight is null ? string.Empty : $"min-height: {MinHeight};")
+	@(MaxHeight is null ? string.Empty : $"max-height: {MaxHeight};")
+	@*& :nth-child(n) {
+		margin-left: @((Wrap ? HorizontalGap / 2.0 : HorizontalGap * 1.0))px;
+		margin-right: @((Wrap ? HorizontalGap / 2.0 : 0.0))px;
+		margin-top: @((Wrap ? VerticalGap / 2.0 : VerticalGap * 1.0))px;
+		margin-bottom: @((Wrap ? VerticalGap / 2.0 : 0.0))px;
+	}
+	& :first-child {
+		@((Horizontal ? "margin-left: 0px;" : string.Empty))
+		@((!Horizontal ? "margin-top: 0px;" : string.Empty))
+	}
+	& :last-child {
+		@((Horizontal ? "margin-right: 0px;" : string.Empty))
+		@((!Horizontal ? "margin-bottom: 0px;" : string.Empty))
+	}*@
+</Styled>
+
+<div class="@flex">
+	@ChildContent
+</div>
+

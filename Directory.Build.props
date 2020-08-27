@@ -1,0 +1,43 @@
+<Project>
+
+	<PropertyGroup>
+		<MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<LangVersion>preview</LangVersion>
+		<Deterministic>true</Deterministic>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup Label="AssemblyInfo">
+		<Product>Blazor.Stack</Product>
+		<Year>$([System.DateTime]::Now.ToString(yyyy))</Year>
+		<DayOfYear>$([System.DateTime]::Now.DayOfYear.ToString(000))</DayOfYear>
+		<Month>$([System.DateTime]::Now.ToString(MM))</Month>
+		<Day>$([System.DateTime]::Now.ToString(dd))</Day>
+		<TimeOfDay>$([System.DateTime]::Now.ToString(HHmm))</TimeOfDay>
+		<VersionPrefix>$(Year).$(Month).$(Day).$(TimeOfDay)</VersionPrefix>
+		<PreReleaseVersionLabel>ci</PreReleaseVersionLabel>
+		<VersionSuffix Condition=" '$(BUILD_BUILDNUMBER)' != '' ">$(PreReleaseVersionLabel)-$(BUILD_BUILDNUMBER)</VersionSuffix>
+		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
+		<InformationalVersion Condition=" '$(BUILD_SOURCEVERSION)' != '' ">$(Version) - Commit Hash: $(BUILD_SOURCEVERSION)</InformationalVersion>
+
+		<Authors>Christopher.Haws</Authors>
+		<Company>Christopher.Haws</Company>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl Condition=" '$(BUILD_REPOSITORY_URI)' != '' ">$(BUILD_REPOSITORY_URI)</PackageProjectUrl>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>LINQPadQuery</_Parameter1>
+		</AssemblyAttribute>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>$(AssemblyName).Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+</Project>

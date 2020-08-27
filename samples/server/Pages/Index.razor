@@ -1,0 +1,53 @@
+﻿@page "/"
+@code {
+	private int count = 20;
+	private bool horizontal = true;
+	private int horizontalGap = 0;
+	private int verticalGap = 0;
+	private int gap = 0;
+	private int maxWidth = 0;
+	private int maxHeight = 0;
+	private bool wrap = true;
+	private bool reverse = false;
+	private StackAlignment horizontalAlignment = StackAlignment.Start;
+	private StackAlignment verticalAlignment = StackAlignment.Start;
+
+	private void onchange() {
+		StateHasChanged();
+	}
+}
+
+<h1>Stack</h1>
+
+<Stack MaxHeight="300px" Wrap>
+	<Slider label="Count" min="0" max="100" @bind-value="count" />
+	<Dropdown label="Horizontal Alignment" TItem="StackAlignment" @bind-value="horizontalAlignment" />
+	<Dropdown label="Vertical Alignment" TItem="StackAlignment" @bind-value="verticalAlignment" />
+	<Checkbox label="Horizontal" @bind-value="horizontal" />
+	<Slider label="Horizontal Gap" min="0" max="100" @bind-value="horizontalGap" />
+	<Slider label="Vertical Gap" min="0" max="100" @bind-value="verticalGap" />
+	<Slider label="Gap" min="0" max="100" @bind-value="gap" />
+	<Slider label="Max Width" min="0" max="600" @bind-value="maxWidth" />
+	<Slider label="Max Height" min="0" max="600" @bind-value="maxHeight" />
+	<Checkbox label="Wrap" @bind-value="wrap" />
+	<Checkbox label="Reverse" @bind-value="reverse" />
+</Stack>
+
+<div style="background-color: #71AFE5;">
+	<Stack
+		Horizontal="horizontal"
+		HorizontalAlignment="horizontalAlignment"
+		VerticalAlignment="verticalAlignment"
+		Gap="@(gap == 0 ? null : gap)"
+		HorizontalGap="@(horizontalGap == 0 ? null : horizontalGap)"
+		VerticalGap="@(verticalGap == 0 ? null : verticalGap)"
+		Wrap="wrap"
+		Reverse="reverse"
+		MaxWidth="@(maxWidth == 0 ? null : $"{maxWidth}px")"
+		MaxHeight="@(maxHeight == 0 ? null : $"{maxHeight}px")"
+	>
+	@for(var i = 0; i < count; i++) {
+		<div style="background-color: #0078D4; width: 50px; height: 50px;">@i</div>
+	}
+	</Stack>
+</div>
