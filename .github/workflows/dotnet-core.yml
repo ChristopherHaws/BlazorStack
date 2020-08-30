@@ -30,8 +30,8 @@ jobs:
     - name: dotnet nuget add sources
       run: dotnet nuget add sources "https://nuget.pkg.github.com/${{ github.actor }}/index.json" --name "github" --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
 
-    - name: nuget push
-      run: dotnet nuget push .\dist\*.nupkg -source "github" --skip-duplicate
+    - name: dotnet nuget push
+      run: dotnet nuget push ".\dist\*.nupkg" --source "github" --skip-duplicate
 
 #    - name: setup nuget
 #      uses: warrenbuckley/Setup-Nuget@v1
