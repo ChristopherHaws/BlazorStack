@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -27,14 +27,20 @@ jobs:
     - name: dotnet pack
       run: dotnet pack -c Release -o dist
 
-    - name: setup nuget
-      uses: warrenbuckley/Setup-Nuget@v1
-
-    - name: nuget sources add
-      run: nuget sources add -name "GPR" -Source "https://nuget.pkg.github.com/${{ github.actor }}/index.json" -Username ${{ github.actor }} -Password ${{ secrets.GITHUB_TOKEN }}
+    - name: dotnet nuget add sources
+      run: dotnet nuget add sources "https://nuget.pkg.github.com/${{ github.actor }}/index.json" --name "github" --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }}
 
     - name: nuget push
-      run: nuget push .\dist\*.nupkg -Source "GPR" -SkipDuplicate
+      run: dotnet nuget push .\dist\*.nupkg -source "github" --skip-duplicate
+
+#    - name: setup nuget
+#      uses: warrenbuckley/Setup-Nuget@v1
+
+#    - name: nuget sources add
+#      run: nuget sources add -name "GPR" -Source "https://nuget.pkg.github.com/${{ github.actor }}/index.json" -Username ${{ github.actor }} -Password ${{ secrets.GITHUB_TOKEN }}
+
+#    - name: nuget push
+#      run: nuget push .\dist\*.nupkg -Source "GPR" -SkipDuplicate
 
 # publish:
 #   runs-on: ubuntu-latest
