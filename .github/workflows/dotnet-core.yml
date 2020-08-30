@@ -17,21 +17,24 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100-preview.8.20417.9
+        source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
   
     - name: dotnet restore
       run: dotnet restore
 
     - name: dotnet build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore --nologo
 
     - name: dotnet pack
-      run: dotnet pack -c Release -o dist
+      run: dotnet pack -c Release -o dist --no-restore --no-build --nologo
 
-    - name: dotnet nuget add sources
-      run: dotnet nuget add sources "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --name "github" --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+#    - name: dotnet nuget add sources
+#      run: dotnet nuget add sources "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --name "github" --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
 
     - name: dotnet nuget push
-      run: dotnet nuget push ".\dist\*.nupkg" --source "github" --skip-duplicate
+      run: dotnet nuget push ".\dist\*.nupkg" --skip-duplicate
 
 #    - name: setup nuget
 #      uses: warrenbuckley/Setup-Nuget@v1
