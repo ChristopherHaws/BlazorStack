@@ -1,3 +1,4 @@
+# https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
 name: CI
 
 on:
@@ -11,6 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOTNET_NOLOGO: true
+      PRERELEASE: true
+      REPOSITORY_URL: https://github.com/${{ github.repository }}.git
+      PROJECT_URL: https://github.com/${{ github.repository }}
+      BUILD_NUMBER: ${{ github.run_number }}
+      COMMIT_SHA: ${{ github.sha }}
     
     steps:
     - uses: actions/checkout@v2
