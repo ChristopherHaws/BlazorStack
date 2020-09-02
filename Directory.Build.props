@@ -19,16 +19,16 @@
 		<TimeOfDay>$([System.DateTime]::Now.ToString(HHmm))</TimeOfDay>
 		<VersionPrefix>1.0.0</VersionPrefix>
 		<PreReleaseVersionLabel>ci</PreReleaseVersionLabel>
-		<VersionSuffix>$(PreReleaseVersionLabel)-$(Year)$(DayOfYear)$(TimeOfDay)</VersionSuffix>
+		<VersionSuffix Condition=" '$(PRERELEASE)' == 'true' ">$(PreReleaseVersionLabel)-$(Year)$(DayOfYear)$(TimeOfDay)</VersionSuffix>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
 		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
-		<InformationalVersion Condition=" '$(BUILD_SOURCEVERSION)' != '' ">$(Version) - Commit Hash: $(BUILD_SOURCEVERSION)</InformationalVersion>
+		<InformationalVersion Condition=" '$(COMMIT_SHA)' != '' ">$(Version) - Commit Hash: $(COMMIT_SHA)</InformationalVersion>
 
 		<Authors>Christopher.Haws</Authors>
 		<Company>Christopher.Haws</Company>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/ChristopherHaws/BlazorStack.git</RepositoryUrl>
-		<PackageProjectUrl Condition=" '$(BUILD_REPOSITORY_URI)' != '' ">$(BUILD_REPOSITORY_URI)</PackageProjectUrl>
+		<RepositoryUrl Condition=" '$(REPOSITORY_URL)' != '' ">$(REPOSITORY_URL)</RepositoryUrl>
+		<PackageProjectUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
 
