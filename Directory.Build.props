@@ -12,14 +12,14 @@
 
 	<PropertyGroup Label="AssemblyInfo">
 		<Product>Blazor.Stack</Product>
-		<Year>$([System.DateTime]::Now.ToString(yyyy))</Year>
+		<Year>$([System.DateTime]::Now.ToString(yy))</Year>
 		<DayOfYear>$([System.DateTime]::Now.DayOfYear.ToString(000))</DayOfYear>
 		<Month>$([System.DateTime]::Now.ToString(MM))</Month>
 		<Day>$([System.DateTime]::Now.ToString(dd))</Day>
 		<TimeOfDay>$([System.DateTime]::Now.ToString(HHmm))</TimeOfDay>
-		<VersionPrefix>$(Year).$(Month).$(Day).$(TimeOfDay)</VersionPrefix>
+		<VersionPrefix>1.0.0</VersionPrefix>
 		<PreReleaseVersionLabel>ci</PreReleaseVersionLabel>
-		<VersionSuffix Condition=" '$(BUILD_BUILDNUMBER)' != '' ">$(PreReleaseVersionLabel)-$(BUILD_BUILDNUMBER)</VersionSuffix>
+		<VersionSuffix>$(PreReleaseVersionLabel)-$(Year)$(DayOfYear)$(TimeOfDay)</VersionSuffix>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
 		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
 		<InformationalVersion Condition=" '$(BUILD_SOURCEVERSION)' != '' ">$(Version) - Commit Hash: $(BUILD_SOURCEVERSION)</InformationalVersion>
