@@ -27,6 +27,7 @@
 		<Authors>Christopher.Haws</Authors>
 		<Company>Christopher.Haws</Company>
 		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/ChristopherHaws/BlazorStack.git</RepositoryUrl>
 		<PackageProjectUrl Condition=" '$(BUILD_REPOSITORY_URI)' != '' ">$(BUILD_REPOSITORY_URI)</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
