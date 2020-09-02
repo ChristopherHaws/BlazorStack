@@ -19,7 +19,8 @@
 		<TimeOfDay>$([System.DateTime]::Now.ToString(HHmm))</TimeOfDay>
 		<VersionPrefix>1.0.0</VersionPrefix>
 		<PreReleaseVersionLabel>ci</PreReleaseVersionLabel>
-		<VersionSuffix Condition=" '$(PRERELEASE)' == 'true' ">$(PreReleaseVersionLabel)-$(Year)$(DayOfYear)$(TimeOfDay)</VersionSuffix>
+		<VersionSuffix Condition=" '$(PRERELEASE)' == 'true' AND '$(BUILD_NUMBER)' == '' ">$(PreReleaseVersionLabel)-$(Year)$(DayOfYear)$(TimeOfDay)</VersionSuffix>
+		<VersionSuffix Condition=" '$(PRERELEASE)' == 'true' AND '$(BUILD_NUMBER)' != '' ">$(PreReleaseVersionLabel)-$(BUILD_NUMBER.PadLeft(5, `0`))</VersionSuffix>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
 		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
 		<InformationalVersion Condition=" '$(COMMIT_SHA)' != '' ">$(Version) - Commit Hash: $(COMMIT_SHA)</InformationalVersion>
