@@ -38,17 +38,11 @@ jobs:
     - name: dotnet pack
       run: dotnet pack -c Release -o dist --no-restore --no-build --nologo
 
-#    - name: dotnet nuget add sources
-#      run: dotnet nuget add sources "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --name "github" --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
-
-    - name: dotnet nuget push
+    - name: dotnet nuget push (github)
       run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate
 
-#    - name: setup nuget
-#      uses: warrenbuckley/Setup-Nuget@v1
-
-#    - name: nuget sources add
-#      run: nuget sources add -name "GPR" -Source "https://nuget.pkg.github.com/${{ github.actor }}/index.json" -Username ${{ github.actor }} -Password ${{ secrets.GITHUB_TOKEN }}
+    - name: dotnet nuget push (nuget)
+      run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate --source "nuget.org" --api-key ${{secrets.NUGET_API_KEY}}
 
 #    - name: nuget push
 #      run: nuget push .\dist\*.nupkg -Source "GPR" -SkipDuplicate
