@@ -19,8 +19,8 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl Condition=" '$(REPOSITORY_URL)' != '' ">$(REPOSITORY_URL)</RepositoryUrl>
 		<PackageProjectUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)</PackageProjectUrl>
-		<PackageLicenseUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)/LICENSE.txt</PackageLicenseUrl>
 		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 

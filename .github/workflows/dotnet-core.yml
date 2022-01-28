@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOTNET_NOLOGO: true
-      PRERELEASE: true
       REPOSITORY_URL: https://github.com/${{ github.repository }}.git
       PROJECT_URL: https://github.com/${{ github.repository }}
       BUILD_NUMBER: ${{ github.run_number }}
