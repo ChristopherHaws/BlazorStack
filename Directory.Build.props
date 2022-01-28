@@ -8,6 +8,8 @@
 		<LangVersion>preview</LangVersion>
 		<Deterministic>true</Deterministic>
 		<Nullable>enable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Label="AssemblyInfo">
@@ -40,6 +42,26 @@
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>$(AssemblyName).Tests</_Parameter1>
 		</AssemblyAttribute>
+	</ItemGroup>
+
+
+	<!-- https://github.com/dotnet/sourcelink -->
+	<!-- https://docs.github.com/en/actions/learn-github-actions/environment-variables -->
+	<PropertyGroup Condition="'$(CI)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+
+		<!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+		<!-- Embed source files that are not tracked by the source control manager in the PDB -->
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+		<!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(CI)' == 'true'">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
 	</ItemGroup>
 
 </Project>
