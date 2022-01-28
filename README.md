@@ -1,6 +1,7 @@
 # BlazorStack
 [![Build Status][ci-badge]][ci]
 [![NuGet][nuget-badge] ![NuGet Downloads][nuget-download-badge]][nuget]
+[![FuGet][fuget-badge]][fuget]
 
 [ci]: https://github.com/ChristopherHaws/BlazorStack/actions?query=workflow%3ACI+branch%3Amain
 [ci-badge]: https://github.com/ChristopherHaws/BlazorStack/workflows/CI/badge.svg
@@ -8,6 +9,9 @@
 [nuget]: https://www.nuget.org/packages/BlazorStack/
 [nuget-badge]: https://img.shields.io/nuget/v/BlazorStack.svg?style=flat-square
 [nuget-download-badge]: https://img.shields.io/nuget/dt/BlazorStack?style=flat-square
+
+[fuget]: https://www.fuget.org/packages/BlazorStack
+[fuget-badge]: https://www.fuget.org/packages/BlazorStack/badge.svg
 
 A stack/flexbox implementation for Blazor.
 
