@@ -43,11 +43,11 @@ jobs:
 
     - name: dotnet nuget push (nuget)
       run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate --source "nuget.org" --api-key ${{secrets.NUGET_API_KEY}}
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
 #    - name: nuget push
 #      run: nuget push .\dist\*.nupkg -Source "GPR" -SkipDuplicate
 #
 # publish:
 #   runs-on: ubuntu-latest
-#   if: github.ref == 'refs/heads/master'
+#   if: github.ref == 'refs/heads/main'
