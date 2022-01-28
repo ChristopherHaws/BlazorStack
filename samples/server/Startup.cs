@@ -1,10 +1,5 @@
 using System.Diagnostics;
 using BlazorStyled;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Sample.Server {
 	public class Startup {
