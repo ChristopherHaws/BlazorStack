@@ -4,29 +4,56 @@
 		<MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
 	</PropertyGroup>
 
-	<PropertyGroup>
-		<LangVersion>preview</LangVersion>
+	<PropertyGroup Label="DotNet">
+		<!-- https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language -->
+		<LangVersion>latest</LangVersion>
 		<Deterministic>true</Deterministic>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>true</ImplicitUsings>
+		<Features>strict</Features>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<!-- https://docs.microsoft.com/en-us/visualstudio/code-quality/migrate-from-fxcop-analyzers-to-net-analyzers?view=vs-2019 -->
+		<AnalysisLevel>latest</AnalysisLevel>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+	</PropertyGroup>
+	
+	<PropertyGroup Label="DotNet" Condition=" '$(CI)' == 'true' ">
+		<NoWarn>$(NoWarn);0618</NoWarn>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
-	<PropertyGroup Label="AssemblyInfo">
-		<Product>Blazor.Stack</Product>
+	<PropertyGroup Label="Packaging">
+		<Product>BlazorStack</Product>
 		<Authors>Christopher.Haws</Authors>
-		<Company>Christopher.Haws</Company>
+		<Copyright>Copyright 2022 BlazorStack</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl Condition=" '$(REPOSITORY_URL)' != '' ">$(REPOSITORY_URL)</RepositoryUrl>
 		<PackageProjectUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)</PackageProjectUrl>
 		<PackageLicenseUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)/LICENSE.txt</PackageLicenseUrl>
 		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<None Include="$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), 'LICENSE.txt'))" Pack="true" PackagePath="\"/>
-		<None Include="$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), 'README.md'))" Pack="true" PackagePath="\"/>
+	<ItemGroup Label="Packaging">
+		<None Include="$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), 'LICENSE.txt'))" Pack="true" PackagePath="\" Visible="false" />
+		<None Include="$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), 'README.md'))" Pack="true" PackagePath="\" Visible="false" />
+	</ItemGroup>
+
+	<ItemGroup Label="Versioning" Condition="'$(CI)' == 'true'">
+		<PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<PropertyGroup Label="Versioning">
+		<MinVerSkip Condition="'$(CI)' != 'true'">true</MinVerSkip>
+	</PropertyGroup>
+
+	<ItemGroup Label="SourceLink" Condition=" '$(CI)' == 'true' ">
+		<!-- https://github.com/dotnet/sourcelink -->
+		<!-- https://github.com/dotnet/reproducible-builds -->
+		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,30 +64,5 @@
 			<_Parameter1>$(AssemblyName).Tests</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
-
-
-	<!-- https://github.com/dotnet/sourcelink -->
-	<!-- https://docs.github.com/en/actions/learn-github-actions/environment-variables -->
-	<PropertyGroup Condition="'$(CI)' == 'true'">
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-
-		<!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-
-		<!-- Embed source files that are not tracked by the source control manager in the PDB -->
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-
-		<!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
-		<DebugType>embedded</DebugType>
-	</PropertyGroup>
-
-	<ItemGroup Condition="'$(CI)' == 'true'">
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
-		<PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="All"/>
-	</ItemGroup>
-
-	<PropertyGroup>
-		<MinVerSkip Condition="'$(CI)' != 'true'">true</MinVerSkip>
-	</PropertyGroup>
 
 </Project>

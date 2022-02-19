@@ -1,75 +1,77 @@
-﻿@using BlazorStyled
+﻿@using Microsoft.AspNetCore.Components;
+@using BlazorStyled
+
 @code {
-	// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-	string flex = default!;
+    // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    string flex = default!;
 
-	/// <summary>
-	/// Defines whether to render Stack children horizontally.
-	/// </summary>
-	[Parameter] public bool Horizontal { get; set; }
+    /// <summary>
+    /// Defines whether to render Stack children horizontally.
+    /// </summary>
+    [Parameter] public bool Horizontal { get; set; }
 
-	/// <summary>
-	/// Defines whether the Stack should take up 100% of the height of its parent.
-	/// </summary>
-	[Parameter] public bool VerticalFill { get; set; }
+    /// <summary>
+    /// Defines whether the Stack should take up 100% of the height of its parent.
+    /// </summary>
+    [Parameter] public bool VerticalFill { get; set; }
 
-	/// <summary>
-	/// Defines how to align Stack children horizontally (along the x-axis).
-	/// </summary>
-	[Parameter] public StackAlignment? HorizontalAlignment { get; set; } = StackAlignment.Start;
+    /// <summary>
+    /// Defines how to align Stack children horizontally (along the x-axis).
+    /// </summary>
+    [Parameter] public StackAlignment? HorizontalAlignment { get; set; } = StackAlignment.Start;
 
-	/// <summary>
-	/// Defines how to align Stack children horizontally (along the y-axis).
-	/// </summary>
-	[Parameter] public StackAlignment? VerticalAlignment { get; set; } = StackAlignment.Start;
+    /// <summary>
+    /// Defines how to align Stack children horizontally (along the y-axis).
+    /// </summary>
+    [Parameter] public StackAlignment? VerticalAlignment { get; set; } = StackAlignment.Start;
 
-	/// <summary>
-	/// Defines whether to render Stack children in the opposite direction (bottom-to-top if it's a
-	/// vertical Stack and right-to-left if it's a horizontal Stack).
-	/// </summary>
-	[Parameter] public bool Reverse { get; set; }
+    /// <summary>
+    /// Defines whether to render Stack children in the opposite direction (bottom-to-top if it's a
+    /// vertical Stack and right-to-left if it's a horizontal Stack).
+    /// </summary>
+    [Parameter] public bool Reverse { get; set; }
 
-	/// <summary>
-	/// Defines whether Stack children should wrap onto multiple rows or columns when they are about
-	/// to overflow the size of the Stack.
-	/// </summary>
-	[Parameter] public bool Wrap { get; set; }
+    /// <summary>
+    /// Defines whether Stack children should wrap onto multiple rows or columns when they are about
+    /// to overflow the size of the Stack.
+    /// </summary>
+    [Parameter] public bool Wrap { get; set; }
 
-	/// <summary>
-	/// Defines the spacing between Stack children.
-	/// </summary>
-	[Parameter] public int? Gap { get; set; }
+    /// <summary>
+    /// Defines the spacing between Stack children.
+    /// </summary>
+    [Parameter] public int? Gap { get; set; }
 
-	/// <summary>
-	/// Defines the row spacing between Stack children.
-	/// </summary>
-	[Parameter] public int? VerticalGap { get; set; }
+    /// <summary>
+    /// Defines the row spacing between Stack children.
+    /// </summary>
+    [Parameter] public int? VerticalGap { get; set; }
 
-	/// <summary>
-	/// Defines the column spacing between Stack children.
-	/// </summary>
-	[Parameter] public int? HorizontalGap { get; set; }
+    /// <summary>
+    /// Defines the column spacing between Stack children.
+    /// </summary>
+    [Parameter] public int? HorizontalGap { get; set; }
 
-	/// <summary>
-	/// Defines the minimum width that the Stack can take.
-	/// </summary>
-	[Parameter] public string? MinWidth { get; set; }
+    /// <summary>
+    /// Defines the minimum width that the Stack can take.
+    /// </summary>
+    [Parameter] public string? MinWidth { get; set; }
 
-	/// <summary>
-	/// Defines the maximum width that the Stack can take.
-	/// </summary>
-	[Parameter] public string? MaxWidth { get; set; }
+    /// <summary>
+    /// Defines the maximum width that the Stack can take.
+    /// </summary>
+    [Parameter] public string? MaxWidth { get; set; }
 
-	/// <summary>
-	/// Defines the minimum height that the Stack can take.
-	/// </summary>
-	[Parameter] public string? MinHeight { get; set; }
+    /// <summary>
+    /// Defines the minimum height that the Stack can take.
+    /// </summary>
+    [Parameter] public string? MinHeight { get; set; }
 
-	/// <summary>
-	/// Defines the maximum height that the Stack can take.
-	/// </summary>
-	[Parameter] public string? MaxHeight { get; set; }
-	[Parameter] public RenderFragment? ChildContent { get; set; }
+    /// <summary>
+    /// Defines the maximum height that the Stack can take.
+    /// </summary>
+    [Parameter] public string? MaxHeight { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
 	private string alignmentName(StackAlignment? type) => type switch {
 		StackAlignment.Start => "flex-start",
