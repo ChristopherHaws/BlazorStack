@@ -46,7 +46,8 @@
 
 	<PropertyGroup Label="Versioning">
 		<MinVerSkip Condition="'$(CI)' != 'true'">true</MinVerSkip>
-		<MinVerVerbosity>diagnostic</MinVerVerbosity>
+		<MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+		<MinVerVerbosity>detailed</MinVerVerbosity>
 	</PropertyGroup>
 
 	<ItemGroup Label="SourceLink" Condition=" '$(CI)' == 'true' ">
