@@ -1,18 +1,18 @@
 ﻿@code {
-	[Parameter] public string label { get; set; } = default!;
-	[Parameter] public bool value { get; set; }
+	[Parameter] public string Label { get; set; } = default!;
+	[Parameter] public bool Value { get; set; }
 
-	[Parameter] public EventCallback<bool> valueChanged { get; set; }
+	[Parameter] public EventCallback<bool> ValueChanged { get; set; }
 
-	private async Task handleChange(ChangeEventArgs args) {
-		value = Convert.ToBoolean(args.Value);
-		await valueChanged.InvokeAsync(value);
+	private async Task HandleChange(ChangeEventArgs args) {
+		Value = Convert.ToBoolean(args.Value);
+		await ValueChanged.InvokeAsync(Value);
 	}
 }
 
 <div>
-	<label>@label:</label>
+	<label>@Label:</label>
 	<br />
-	<input type="checkbox" checked="@value" @oninput="handleChange" />
+	<input type="checkbox" checked="@Value" @oninput="HandleChange" />
 	<br />
 </div>

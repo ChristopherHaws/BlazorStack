@@ -4,6 +4,8 @@ name: CI
 on:
   push:
     branches: [ main ]
+    tags:
+      - '*.*.*'
   pull_request:
     branches: [ main ]
 
@@ -18,30 +20,31 @@ jobs:
       COMMIT_SHA: ${{ github.sha }}
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: setup dotnet
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.101
-        source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+          source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    - name: dotnet restore
-      run: dotnet restore
+      - name: dotnet restore
+        run: dotnet restore
 
-    - name: dotnet build
-      run: dotnet build --configuration Release --no-restore --nologo
+      - name: dotnet build
+        run: dotnet build --configuration Release --no-restore --nologo
 
-    - name: dotnet pack
-      run: dotnet pack -c Release -o dist --no-restore --no-build --nologo
+      - name: dotnet pack
+        run: dotnet pack -c Release -o dist --no-restore --no-build --nologo
 
-    - name: dotnet nuget push (github)
-      run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate
+      - name: dotnet nuget push (github)
+        run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate
 
-    - name: dotnet nuget push (nuget)
-      run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate --source "nuget.org" --api-key ${{secrets.NUGET_API_KEY}}
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: dotnet nuget push (nuget)
+        run: dotnet nuget push "./dist/*.nupkg" --skip-duplicate --source "nuget.org" --api-key ${{secrets.NUGET_API_KEY}}
+        if: github.event_name == 'create' && github.event.ref_type == 'tag'
+        #if: github.event_name == 'push' && github.ref == 'refs/heads/main'
