@@ -1,28 +1,28 @@
 ﻿@typeparam TItem
 @code {
-	[Parameter] public string label { get; set; } = default!;
-	[Parameter] public TItem value { get; set; } = default!;
+	[Parameter] public string Label { get; set; } = default!;
+	[Parameter] public TItem Value { get; set; } = default!;
 
-	[Parameter] public EventCallback<TItem> valueChanged { get; set; }
+	[Parameter] public EventCallback<TItem> ValueChanged { get; set; }
 
-	private async Task handleChange(ChangeEventArgs args) {
+	private async Task HandleChange(ChangeEventArgs args) {
 		var changedValue = args.Value?.ToString();
 		if (changedValue is null) {
 			return;
 		}
 
-		value = (TItem)Enum.Parse(typeof(TItem), changedValue);
-		await valueChanged.InvokeAsync(value);
+		Value = (TItem)Enum.Parse(typeof(TItem), changedValue);
+		await ValueChanged.InvokeAsync(Value);
 	}
 }
 
 <div>
-	<label>@label:</label>
+	<label>@Label:</label>
 	<br />
-	<select @onchange="handleChange">
+	<select @onchange="HandleChange">
 		@foreach (TItem enumValue in Enum.GetValues(typeof(TItem)))
 		{
-			<option value="@enumValue" selected="@object.Equals(enumValue, value)">@enumValue</option>
+			<option value="@enumValue" selected="@Equals(enumValue, Value)">@enumValue</option>
 		}
 	</select>
 	<br />

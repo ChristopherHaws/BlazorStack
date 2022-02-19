@@ -1,13 +1,8 @@
-namespace Sample.Server {
-	public class Program {
-		public static void Main(string[] args) {
-			CreateHostBuilder(args).Build().Run();
-		}
+using Sample.Server;
 
-		public static IHostBuilder CreateHostBuilder(string[] args) =>
-			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder => {
-					webBuilder.UseStartup<Startup>();
-				});
-	}
-}
+Host.CreateDefaultBuilder(args)
+	.ConfigureWebHostDefaults(webBuilder => {
+		webBuilder.UseStartup<Startup>();
+	})
+	.Build()
+	.Run();

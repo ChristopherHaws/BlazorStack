@@ -1,20 +1,20 @@
 ﻿@code {
-	[Parameter] public string label { get; set; } = default!;
-	[Parameter] public int value { get; set; }
-	[Parameter] public int min { get; set; }
-	[Parameter] public int max { get; set; }
+	[Parameter] public string Label { get; set; } = default!;
+	[Parameter] public int Value { get; set; }
+	[Parameter] public int Min { get; set; }
+	[Parameter] public int Max { get; set; }
 
-	[Parameter] public EventCallback<int> valueChanged { get; set; }
+	[Parameter] public EventCallback<int> ValueChanged { get; set; }
 
-	private async Task handleChange(ChangeEventArgs args) {
-		value = Convert.ToInt32((string?)args.Value);
-		await valueChanged.InvokeAsync(value);
+	private async Task HandleChange(ChangeEventArgs args) {
+		Value = Convert.ToInt32((string?)args.Value);
+		await ValueChanged.InvokeAsync(Value);
 	}
 }
 
 <div>
-	<label>@label: @value</label>
+	<label>@Label: @Value</label>
 	<br />
-	<input type="range" min="@min" max="@max" value="@value" @oninput="handleChange" />
+	<input type="range" min="@Min" max="@Max" value="@Value" @oninput="HandleChange" />
 	<br />
 </div>

@@ -17,7 +17,7 @@
 		<AnalysisLevel>latest</AnalysisLevel>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 	</PropertyGroup>
-	
+
 	<PropertyGroup Label="DotNet" Condition=" '$(CI)' == 'true' ">
 		<NoWarn>$(NoWarn);0618</NoWarn>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -31,7 +31,6 @@
 		<RepositoryUrl Condition=" '$(REPOSITORY_URL)' != '' ">$(REPOSITORY_URL)</RepositoryUrl>
 		<PackageProjectUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -47,6 +46,7 @@
 
 	<PropertyGroup Label="Versioning">
 		<MinVerSkip Condition="'$(CI)' != 'true'">true</MinVerSkip>
+		<MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
 	</PropertyGroup>
 
 	<ItemGroup Label="SourceLink" Condition=" '$(CI)' == 'true' ">

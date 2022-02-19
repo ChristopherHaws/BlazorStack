@@ -71,9 +71,13 @@
     /// Defines the maximum height that the Stack can take.
     /// </summary>
     [Parameter] public string? MaxHeight { get; set; }
+
+	/// <summary>
+	/// Defines the content to be rendered in the stack.
+	/// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-	private string alignmentName(StackAlignment? type) => type switch {
+	private string AlignmentName(StackAlignment? type) => type switch {
 		StackAlignment.Start => "flex-start",
 		StackAlignment.End => "flex-end",
 		StackAlignment.Centered => "center",
@@ -89,8 +93,8 @@
 	flex-direction: @((Horizontal ? "row" : "column") + (Reverse ? "-reverse" : string.Empty));
 	flex-wrap: @(Wrap ? "wrap" : "nowrap");
 	@(VerticalFill ? "height: 100%;" : string.Empty)
-	@(HorizontalAlignment is null ? string.Empty : $"{(Horizontal ? "justify-content" : "align-items")}: {alignmentName(HorizontalAlignment)};")
-	@(VerticalAlignment is null ? string.Empty : $"{(Horizontal ? "align-items" : "justify-content")}: {alignmentName(VerticalAlignment)};")
+	@(HorizontalAlignment is null ? string.Empty : $"{(Horizontal ? "justify-content" : "align-items")}: {AlignmentName(HorizontalAlignment)};")
+	@(VerticalAlignment is null ? string.Empty : $"{(Horizontal ? "align-items" : "justify-content")}: {AlignmentName(VerticalAlignment)};")
 	@(Gap is null ? string.Empty : $"gap: {Gap}px;")
 	@(Gap is null ? string.Empty : $"grid-gap: {Gap}px;")
 	@(HorizontalGap is null ? string.Empty : $"column-gap: {HorizontalGap}px;")
@@ -120,4 +124,3 @@
 <div class="@flex">
 	@ChildContent
 </div>
-

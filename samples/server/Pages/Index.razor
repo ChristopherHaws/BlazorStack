@@ -2,35 +2,31 @@
 @code {
 	private int count = 20;
 	private bool horizontal = true;
-	private int horizontalGap = 0;
-	private int verticalGap = 0;
-	private int gap = 0;
-	private int maxWidth = 0;
-	private int maxHeight = 0;
+	private int horizontalGap;
+	private int verticalGap;
+	private int gap;
+	private int maxWidth;
+	private int maxHeight;
 	private bool wrap = true;
-	private bool reverse = false;
+	private bool reverse;
 	private StackAlignment horizontalAlignment = StackAlignment.Start;
 	private StackAlignment verticalAlignment = StackAlignment.Start;
-
-	private void onchange() {
-		StateHasChanged();
-	}
 }
 
 <h1>Stack</h1>
 
 <Stack MaxHeight="300px" Wrap>
-	<Slider label="Count" min="0" max="100" @bind-value="count" />
-	<Dropdown label="Horizontal Alignment" TItem="StackAlignment" @bind-value="horizontalAlignment" />
-	<Dropdown label="Vertical Alignment" TItem="StackAlignment" @bind-value="verticalAlignment" />
-	<Checkbox label="Horizontal" @bind-value="horizontal" />
-	<Slider label="Horizontal Gap" min="0" max="100" @bind-value="horizontalGap" />
-	<Slider label="Vertical Gap" min="0" max="100" @bind-value="verticalGap" />
-	<Slider label="Gap" min="0" max="100" @bind-value="gap" />
-	<Slider label="Max Width" min="0" max="600" @bind-value="maxWidth" />
-	<Slider label="Max Height" min="0" max="600" @bind-value="maxHeight" />
-	<Checkbox label="Wrap" @bind-value="wrap" />
-	<Checkbox label="Reverse" @bind-value="reverse" />
+	<Slider Label="Count" Min="0" Max="100" @bind-value="count" />
+	<Dropdown Label="Horizontal Alignment" TItem="StackAlignment" @bind-value="horizontalAlignment" />
+	<Dropdown Label="Vertical Alignment" TItem="StackAlignment" @bind-value="verticalAlignment" />
+	<Checkbox Label="Horizontal" @bind-value="horizontal" />
+	<Slider Label="Horizontal Gap" Min="0" Max="100" @bind-value="horizontalGap" />
+	<Slider Label="Vertical Gap" Min="0" Max="100" @bind-value="verticalGap" />
+	<Slider Label="Gap" Min="0" Max="100" @bind-value="gap" />
+	<Slider Label="Max Width" Min="0" Max="600" @bind-value="maxWidth" />
+	<Slider Label="Max Height" Min="0" Max="600" @bind-value="maxHeight" />
+	<Checkbox Label="Wrap" @bind-value="wrap" />
+	<Checkbox Label="Reverse" @bind-value="reverse" />
 </Stack>
 
 <div style="background-color: #71AFE5;">
