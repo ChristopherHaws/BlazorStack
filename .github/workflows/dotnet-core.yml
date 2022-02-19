@@ -24,7 +24,8 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
@@ -45,7 +46,8 @@ jobs:
       - name: dotnet pack
         run: dotnet pack -c Release -o dist --no-restore --no-build --nologo
 
-      - uses: actions/upload-artifact@v2
+      - name: upload artifacts (github)
+        uses: actions/upload-artifact@v2
         with:
           name: artifact
           path: dist
