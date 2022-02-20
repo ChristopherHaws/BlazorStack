@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0;</TargetFrameworks>
-    <PackageTags>flex flexbox grid stack blazor ui component</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>flex flexbox grid stack stackpanel blazor ui component</PackageTags>
     <Description>
       A simple layout component for blazor that is based on Stack from FluentUI:
       https://developer.microsoft.com/en-us/fluentui#/controls/web/stack

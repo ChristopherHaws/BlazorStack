@@ -13,7 +13,9 @@
 [fuget]: https://www.fuget.org/packages/BlazorStack
 [fuget-badge]: https://www.fuget.org/packages/BlazorStack/badge.svg
 
-A stack/flexbox implementation for Blazor.
+A stack/flexbox implementation for Blazor based on [React FluentUI's Stack](https://developer.microsoft.com/en-us/fluentui#/controls/web/stack) component which itself is based on [WPF's StackPanel](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.stackpanel?view=windowsdesktop-6.0).
+
+**Demo Site**: https://blazorstack.dev/
 
 ## Install
 BlazorStack relies on [BlazorStyled](https://blazorstyled.io) to render dynamic styles. Please follow the [install instructions](https://blazorstyled.io/install) for that library when using BlazorStack.

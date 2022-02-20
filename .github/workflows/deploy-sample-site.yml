@@ -1,0 +1,41 @@
+name: Deploy Sample Site
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-sample-site:
+    runs-on: ubuntu-latest
+    steps:
+      # uses GitHub's checkout action to checkout code form the master branch
+      - uses: actions/checkout@v2
+
+      # sets up .NET Core SDK 3.1
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+
+      - name: dotnet publish
+        run: dotnet publish samples/wasm/Sample.Wasm.csproj -c Release -o release --nologo
+
+      # Use this to fix the URL if you are not hosting at the root of a URL
+      # changes the base-tag in index.html from '/' to 'BlazorGitHubPagesDemo' to match GitHub Pages repository subdirectory
+      #- name: update base-tag in index.html
+      #  run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorStack\/" \/>/g' dist/sample/wwwroot/index.html
+
+      # copy index.html to 404.html to serve the same file when a file is not found
+      - name: copy index.html to 404.html
+        run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+      # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+      - name: add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
+
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: release/wwwroot
