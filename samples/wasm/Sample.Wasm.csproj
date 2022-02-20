@@ -4,11 +4,14 @@
 		<TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <NoWarn>$(NoWarn);CA2007</NoWarn>
+    <GHPages>true</GHPages>
+    <GHPagesBase>https://blazorstack.dev</GHPagesBase>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
+    <PackageReference Include="PublishSPAforGitHubPages.Build" Version="1.3.6" />
 	</ItemGroup>
 
 	<ItemGroup>
