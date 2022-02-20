@@ -6,13 +6,15 @@
 	[Parameter] public EventCallback<TItem> ValueChanged { get; set; }
 }
 
-<div>
+<div style="width: 30%">
 	<MudSelect
 		Label="@Label"
 		Value="@Value"
 		ValueChanged="@ValueChanged"
 		Variant="@Variant.Outlined"
 		AnchorOrigin="@Origin.BottomCenter"
+		Margin="Margin.Dense"
+		Dense="true"
 	>
     	@foreach (TItem enumValue in Enum.GetValues(typeof(TItem)))
         {

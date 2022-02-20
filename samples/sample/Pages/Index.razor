@@ -13,7 +13,7 @@
 	private StackAlignment verticalAlignment = StackAlignment.Start;
 }
 
-<Stack MaxHeight="350px" Wrap>
+<Stack MaxHeight="400px" Wrap VerticalGap="8" HorizontalAlignment="StackAlignment.Centered">
 	<Slider Label="Count" Min="0" Max="100" @bind-value=@count />
 	<Dropdown Label="Horizontal Alignment" TItem="StackAlignment" @bind-Value="horizontalAlignment" />
 	<Dropdown Label="Vertical Alignment" TItem="StackAlignment" @bind-Value="verticalAlignment" />
@@ -27,7 +27,7 @@
 	<Checkbox Label="Reverse" @bind-Value="reverse" />
 </Stack>
 
-<div style="background-color: #71AFE5;">
+<div class="mt-8" style="background-color: #71AFE5">
     <Stack
     	Horizontal="horizontal"
     	HorizontalAlignment="horizontalAlignment"
