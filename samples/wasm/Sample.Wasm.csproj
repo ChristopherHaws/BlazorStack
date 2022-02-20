@@ -5,7 +5,8 @@
     <IsPackable>false</IsPackable>
     <NoWarn>$(NoWarn);CA2007</NoWarn>
     <GHPages>true</GHPages>
-    <GHPagesBase>https://blazorstack.dev</GHPagesBase>
+    <GHPagesBase>$(PackageProjectUrl)</GHPagesBase>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -17,6 +18,10 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\sample\Sample.csproj" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
 
 
 </Project>
