@@ -5,16 +5,10 @@
 	[Parameter] public int Max { get; set; }
 
 	[Parameter] public EventCallback<int> ValueChanged { get; set; }
-
-	private async Task HandleChange(ChangeEventArgs args) {
-		Value = Convert.ToInt32((string?)args.Value);
-		await ValueChanged.InvokeAsync(Value);
-	}
 }
 
 <div>
-	<label>@Label: @Value</label>
-	<br />
-	<input type="range" min="@Min" max="@Max" value="@Value" @oninput="HandleChange" />
-	<br />
+	<MudSlider Value=@Value ValueChanged=@ValueChanged min=@Min max=@Max>
+		@Label
+	</MudSlider>
 </div>

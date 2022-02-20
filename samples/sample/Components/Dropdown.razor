@@ -4,26 +4,19 @@
 	[Parameter] public TItem Value { get; set; } = default!;
 
 	[Parameter] public EventCallback<TItem> ValueChanged { get; set; }
-
-	private async Task HandleChange(ChangeEventArgs args) {
-		var changedValue = args.Value?.ToString();
-		if (changedValue is null) {
-			return;
-		}
-
-		Value = (TItem)Enum.Parse(typeof(TItem), changedValue);
-		await ValueChanged.InvokeAsync(Value);
-	}
 }
 
 <div>
-	<label>@Label:</label>
-	<br />
-	<select @onchange="HandleChange">
-		@foreach (TItem enumValue in Enum.GetValues(typeof(TItem)))
-		{
-			<option value="@enumValue" selected="@Equals(enumValue, Value)">@enumValue</option>
-		}
-	</select>
-	<br />
+	<MudSelect
+		Label="@Label"
+		Value="@Value"
+		ValueChanged="@ValueChanged"
+		Variant="@Variant.Outlined"
+		AnchorOrigin="@Origin.BottomCenter"
+	>
+    	@foreach (TItem enumValue in Enum.GetValues(typeof(TItem)))
+        {
+		    <MudSelectItem Value="@enumValue" />
+        }
+    </MudSelect>
 </div>
