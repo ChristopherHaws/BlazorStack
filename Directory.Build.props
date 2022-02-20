@@ -27,8 +27,8 @@
 		<Authors>Christopher.Haws</Authors>
 		<Copyright>Copyright 2022 BlazorStack</Copyright>
 		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://blazorstack.dev</PackageProjectUrl>
 		<RepositoryUrl Condition=" '$(REPOSITORY_URL)' != '' ">$(REPOSITORY_URL)</RepositoryUrl>
-		<PackageProjectUrl Condition=" '$(PROJECT_URL)' != '' ">$(PROJECT_URL)</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
